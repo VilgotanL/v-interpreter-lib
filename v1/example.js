@@ -1,5 +1,6 @@
 let interpreter = createInterpreter({
     title: "Brainf*** Interpreter",
+    theme: "light",
     titlebar: [
         {p: "by VilgotanL"},
         {a: "Brainf***", href: "https://esolangs.org/wiki/Brainfuck"},

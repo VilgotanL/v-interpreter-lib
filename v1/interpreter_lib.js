@@ -98,7 +98,8 @@ function createInterpreter(options) {
     outputEl.innerText = options.output;
     mainDiv.appendChild(outputEl);
 
-    document.body.classList.add("light_theme");
+    const theme = options.theme === "dark" ? "dark_theme" : "light_theme";
+    document.body.classList.add(theme);
     document.body.appendChild(mainDiv);
 
     function setButtonsDisabled(bool) {

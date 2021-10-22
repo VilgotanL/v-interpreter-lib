@@ -72,7 +72,7 @@ function createInterpreter(options) {
     const codeEl = document.createElement("textarea");
     codeEl.className = "code";
     codeEl.spellcheck = false;
-    codeEl.innerText = options.code;
+    codeEl.value = options.code;
     codeWrapper.appendChild(codeEl);
 
     //buttons
@@ -162,6 +162,8 @@ function createInterpreter(options) {
         },
         set: function(val) {
             codeValue = val.toString();
+            codeEl.value = codeValue;
+            updateEditor();
         },
     });
 
@@ -217,7 +219,7 @@ function createInterpreter(options) {
     }
 
     interpreter.output = function(str) {
-        outputEl.innerHTML += escapeHtml(str);
+        outputEl.innerHTML += escapeHtml(""+str);
     }
     interpreter.input = function(str) {
         return prompt(str || "Input:") || "";

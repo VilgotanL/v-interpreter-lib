@@ -13,6 +13,8 @@ function createInterpreter(options) {
     titleH1.innerText = options.title;
     titleBar.appendChild(titleH1);
 
+    document.title = options.title;
+
     for(let i=0; i<options.titlebar.length; i++) {
         let el = options.titlebar[i];
 

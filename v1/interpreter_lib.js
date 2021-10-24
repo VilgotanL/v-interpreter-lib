@@ -252,6 +252,8 @@ function initEditor(syntaxEl, codeEl, wrapper, generateHighlightingHtml) {
         codeEl.style.height = wrapper.clientHeight+"px";
         syntaxEl.style.height = wrapper.clientHeight+"px";
         syntaxEl.style.width = wrapper.clientWidth+"px";
+
+        window.location.hash = "#"+btoa(codeEl.value.replace(/[^\x00-\xFF]/g, "")); //remove unicode
     }
 
     window.addEventListener("load", function() {
@@ -263,9 +265,9 @@ function initEditor(syntaxEl, codeEl, wrapper, generateHighlightingHtml) {
     });
 
     function insertText(text) {
-        let val = code.value;
+        let val = codeEl.value;
         let newCPos = codeEl.selectionStart + text.length;
-        code.value = val.substring(0, codeEl.selectionStart) + text + val.substring(codeEl.selectionEnd);
+        codeEl.value = val.substring(0, codeEl.selectionStart) + text + val.substring(codeEl.selectionEnd);
         codeEl.selectionStart = newCPos;
         codeEl.selectionEnd = newCPos;
 
@@ -279,6 +281,15 @@ function initEditor(syntaxEl, codeEl, wrapper, generateHighlightingHtml) {
             insertText("\t");
         }
     });
+
+    if(window.location.hash) {
+        try {
+            codeEl.value = atob(window.location.hash.slice(1));
+            updateEditor();
+        } catch(e) {
+            console.log("Failed to set code from hash", e);
+        }
+    }
 
     return updateEditor;
 }

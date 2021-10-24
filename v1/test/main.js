@@ -4,8 +4,6 @@ let interpreter = createInterpreter({
     titlebar: [
         {p: "by VilgotanL"},
         {a: "Brainf***", href: "https://esolangs.org/wiki/Brainfuck"},
-        {a: "Docs", href: "doc.html"},
-        {a: "List", href: "list.html"},
     ],
     options: [
         {slow: "checkbox", text: "Slow: ", value: true},

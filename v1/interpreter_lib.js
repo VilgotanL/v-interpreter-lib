@@ -253,7 +253,14 @@ function initEditor(syntaxEl, codeEl, wrapper, generateHighlightingHtml) {
         syntaxEl.style.height = wrapper.clientHeight+"px";
         syntaxEl.style.width = wrapper.clientWidth+"px";
 
-        window.location.hash = "#"+btoa(codeEl.value.replace(/[^\x00-\xFF]/g, "")); //remove unicode
+        try {
+            let newHash = "#"+btoa(codeEl.value.replace(/[^\x00-\xFF]/g, "")); //remove unicode
+            if(window.location.hash !== newHash) {
+                window.location.hash = newHash;
+            }
+        } catch(e) {
+            console.log("Failed to set hash", e);
+        }
     }
 
     window.addEventListener("load", function() {

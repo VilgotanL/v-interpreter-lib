@@ -157,23 +157,19 @@ function createInterpreter(options) {
         return escaped;
     }
 
-    let codeValue = options.code;
     Object.defineProperty(interpreter, "code", {
         get: function() {
-            return codeValue;
+            return codeEl.value;
         },
         set: function(val) {
-            codeValue = val.toString();
-            codeEl.value = codeValue;
+            codeEl.value = ""+val;
             updateEditor();
         },
     });
 
     let highlights = [];
     let updateEditor = initEditor(codeSyntaxPre, codeEl, codeWrapper, generateHighlightingHtml);
-    codeEl.addEventListener("input", function() {
-        codeValue = codeEl.value;
-    });
+
     function generateHighlightingHtml(code) {
         let html = '<span>';
         let currChar = 0;
